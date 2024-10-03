@@ -3,22 +3,22 @@
 
     Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
 
-    DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
+    DigitalPersona, FingerJet, and FingerJetFX are registered trademarks
     or trademarks of DigitalPersona, Inc. in the United States and other
     countries.
 
     FingerJetFX OSE is open source software that you may modify and/or
     redistribute under the terms of the GNU Lesser General Public License
-    as published by the Free Software Foundation, either version 3 of the 
-    License, or (at your option) any later version, provided that the 
-    conditions specified in the COPYRIGHT.txt file provided with this 
+    as published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version, provided that the
+    conditions specified in the COPYRIGHT.txt file provided with this
     software are met.
- 
+
     For more information, please visit digitalpersona.com/fingerjetfx.
-*/ 
+*/
 /*
-      BINARY: testFRFXLL - Unit Tests for Fingerprint Feature Extractor - LowLevel API      
-      
+      BINARY: testFRFXLL - Unit Tests for Fingerprint Feature Extractor - LowLevel API
+
       ALGORITHM:      Alexander Ivanisov
                       Yi Chen
                       Salil Prabhakar
@@ -38,7 +38,7 @@
 
 #include "dpfrUnitTest.h"
 
-#include "TestRawImage.h"
+#include "testRawImage.h"
 
 #include <random>
 
@@ -334,7 +334,7 @@ public:
     savedCRC = CalculateCRC(test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height);
     TS_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, FRFXLL_FEX_ENABLE_ENHANCEMENT, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    
+
     unsigned int num_minutia = 0;
     unsigned int minutia_ppi = 0;
     TS_ASSERT_OK(FRFXLLGetMinutiaInfo(hFtrSet,&num_minutia,&minutia_ppi));
@@ -353,26 +353,26 @@ public:
   // wanted to put this in Internals, but no easy way to incorporate a CRC there...
   void testCPPRandomConsistency() {
 
-	const size_t N = 1000;
-	unsigned char data[N];
+        const size_t N = 1000;
+        unsigned char data[N];
 
-	const int seeds[] = {4,17,31,217,63,972,47};
-	std::seed_seq sdsq(seeds,seeds+7); 
+        const int seeds[] = {4,17,31,217,63,972,47};
+        std::seed_seq sdsq(seeds,seeds+7);
 
-	std::mt19937 engine;
-	engine.seed(sdsq);
+        std::mt19937 engine;
+        engine.seed(sdsq);
 
-	std::uniform_int_distribution<unsigned char> ucd(0,255);
+        std::uniform_int_distribution<unsigned char> ucd(0,255);
 
-	// now we are going to generate 1000 numbers into data
-	for (unsigned int i = 0; i < N; i++) {
-		data[i]=ucd(engine);
-	}
+        // now we are going to generate 1000 numbers into data
+        for (unsigned int i = 0; i < N; i++) {
+                data[i]=ucd(engine);
+        }
 
 //    printf("CalculateCRC %u\n",CalculateCRC( data,N));
     TS_ASSERT_EQUALS_X(CalculateCRC(data,N), 128941);
   }
-  
+
 };
 
 class CreatingFeatureSetAnsiUnalligned : public CxxTest::TestSuite, private FixtureWithContext {
