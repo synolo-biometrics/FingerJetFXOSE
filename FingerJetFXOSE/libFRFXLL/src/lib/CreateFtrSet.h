@@ -78,8 +78,8 @@ namespace FingerJetFxOSE {
       ) {
         if (width > 2000 || height > 2000)                         return FRFXLL_ERR_INVALID_IMAGE;
         if (dpi < 300 || dpi > 1024)                               return FRFXLL_ERR_INVALID_IMAGE;
-        if (width * 500 < 150 * dpi  || width * 500 > 812 * dpi)   return FRFXLL_ERR_INVALID_IMAGE; // in range 0.3..1.62 in
-        if (height * 500 < 150 * dpi || height * 500 > 1000 * dpi) return FRFXLL_ERR_INVALID_IMAGE; // in range 0.3..2.0 in
+        if (width * 500 < 64 * dpi  || width * 500 > 800 * dpi)    return FRFXLL_ERR_INVALID_IMAGE; // in range 0.3..1.62 in
+        if (height * 500 < 64 * dpi || height * 500 > 1000 * dpi)  return FRFXLL_ERR_INVALID_IMAGE; // in range 0.3..2.0 in
         
         Ptr<FpFtrSetObj> ftrSet(new(ctx) FpFtrSetObj(ctx));
         if (!ftrSet) {

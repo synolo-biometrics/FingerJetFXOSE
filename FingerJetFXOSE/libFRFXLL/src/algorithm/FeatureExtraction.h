@@ -29,9 +29,9 @@
 #include "top_n.h"
 #include "fft_enhance.h"
 
-#define FRFXLL_EXTRACT_MIN_500WIDTH 196
+#define FRFXLL_EXTRACT_MIN_500WIDTH 64
 #define FRFXLL_EXTRACT_MAX_500WIDTH 800
-#define FRFXLL_EXTRACT_MIN_500HEIGHT 196
+#define FRFXLL_EXTRACT_MIN_500HEIGHT 64
 #define FRFXLL_EXTRACT_MAX_500HEIGHT 1000
 #define FRFXLL_EXTRACT_MIN_DPI 300
 #define FRFXLL_EXTRACT_MAX_DPI 1008
@@ -209,13 +209,13 @@ namespace Embedded {
     ) {
       AssertR(size_ >= width_ * height_, FRFXLL_ERR_INVALID_IMAGE);
 
-		// lets assure that input is ok...
+      // lets assure that input is ok...
       AssertR(imageResolution_ >= FRFXLL_EXTRACT_MIN_DPI, FRFXLL_ERR_INVALID_IMAGE);
       AssertR(imageResolution_ <= FRFXLL_EXTRACT_MAX_DPI, FRFXLL_ERR_INVALID_IMAGE);
-      
+
       // lets see what scaled image dimensions would be...
       size_t width_at_500 = width_*500/imageResolution_;
-      size_t height_at_500 = width_*500/imageResolution_;
+      size_t height_at_500 = height_*500/imageResolution_;
 
       AssertR(width_at_500 >= FRFXLL_EXTRACT_MIN_500WIDTH, FRFXLL_ERR_INVALID_IMAGE);
       AssertR(height_at_500 >= FRFXLL_EXTRACT_MIN_500HEIGHT, FRFXLL_ERR_INVALID_IMAGE);
